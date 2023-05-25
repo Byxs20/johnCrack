@@ -37,18 +37,18 @@ if __name__ == '__main__':
 
     isCrack = False
     hash_file = sys.argv[1]
-    
+
     for command in commands:
         run_command = ["john"]
-        for i in command:
-            run_command.append(i)
+        run_command.extend(iter(command))
         run_command.append(f"{hash_file}")
         print(f"$ {' '.join(run_command)}")
         crack(run_command)
 
     baseDir = os.path.dirname(os.path.abspath(__file__))
-    wordlistsPath = baseDir + "/wordlists/%s"
+    wordlistsPath = f"{baseDir}/wordlists/%s"
 
     for wordlistsName in ["Byxs20_top2w5.txt", "Byxs20_top10w.txt"]:
         run_command = ["john", f"--wordlist={wordlistsPath % wordlistsName}", f"{hash_file}"]
+        print(f"$ {' '.join(run_command)}")
         crack(run_command)
