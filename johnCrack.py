@@ -46,7 +46,9 @@ if __name__ == '__main__':
         print(f"$ {' '.join(run_command)}")
         crack(run_command)
 
-    wordlistsPath = "~/WSL/wordlists/%s"
+    baseDir = os.path.dirname(os.path.abspath(__file__))
+    wordlistsPath = baseDir + "/wordlists/%s"
+
     for wordlistsName in ["Byxs20_top2w5.txt", "Byxs20_top10w.txt"]:
         run_command = ["john", f"--wordlist={wordlistsPath % wordlistsName}", f"{hash_file}"]
         crack(run_command)
